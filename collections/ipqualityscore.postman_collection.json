@@ -1,0 +1,246 @@
+{
+  "info": {
+    "name": "IPQualityScore API",
+    "description": {
+      "content": "Real-time fraud prevention and threat intelligence API from IPQualityScore (IPQS). The API key is passed as a path parameter and responses are returned as JSON.",
+      "type": "text/plain"
+    },
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://www.ipqualityscore.com/api/json"
+    },
+    {
+      "key": "apiKey",
+      "value": "YOUR_API_KEY"
+    }
+  ],
+  "item": [
+    {
+      "id": "a1f0c2d4-0001-4a10-9a01-100000000001",
+      "name": "IP Reputation",
+      "description": {
+        "content": "Proxy, VPN, Tor, and IP reputation scoring. Adding billing/shipping/order parameters enables Transaction Scoring.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a1f0c2d4-0001-4a10-9a01-100000000002",
+          "name": "Proxy, VPN, Tor, and IP reputation lookup.",
+          "request": {
+            "name": "Proxy, VPN, Tor, and IP reputation lookup.",
+            "description": {
+              "content": "Scores an IP address for proxy, VPN, and Tor usage, bot status, recent abuse, and abuse velocity. With transaction parameters this returns a transaction_details object (Transaction Scoring).",
+              "type": "text/plain"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/ip/{{apiKey}}/8.8.8.8?strictness=1",
+              "path": ["ip", "{{apiKey}}", "8.8.8.8"],
+              "host": ["{{baseUrl}}"],
+              "query": [
+                { "key": "strictness", "value": "1" }
+              ],
+              "variable": []
+            },
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "id": "a1f0c2d4-0002-4a10-9a01-200000000001",
+      "name": "Email Validation",
+      "description": {
+        "content": "Validate email addresses for deliverability, disposable domains, spam traps, and abuse.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a1f0c2d4-0002-4a10-9a01-200000000002",
+          "name": "Validate an email address.",
+          "request": {
+            "name": "Validate an email address.",
+            "description": {
+              "content": "Verifies an email address for validity, deliverability, disposable/temporary domains, spam traps, honeypots, and recent abuse.",
+              "type": "text/plain"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/email/{{apiKey}}/user%40example.com?timeout=7",
+              "path": ["email", "{{apiKey}}", "user%40example.com"],
+              "host": ["{{baseUrl}}"],
+              "query": [
+                { "key": "timeout", "value": "7" }
+              ],
+              "variable": []
+            },
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "id": "a1f0c2d4-0003-4a10-9a01-300000000001",
+      "name": "Phone Validation",
+      "description": {
+        "content": "Validate phone numbers across 150+ countries with carrier, line type, and fraud scoring.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a1f0c2d4-0003-4a10-9a01-300000000002",
+          "name": "Validate a phone number.",
+          "request": {
+            "name": "Validate a phone number.",
+            "description": {
+              "content": "Validates a phone number returning carrier, line type, active status, geolocation, and a fraud score.",
+              "type": "text/plain"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/phone/{{apiKey}}/18007132618?country=US",
+              "path": ["phone", "{{apiKey}}", "18007132618"],
+              "host": ["{{baseUrl}}"],
+              "query": [
+                { "key": "country", "value": "US" }
+              ],
+              "variable": []
+            },
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "id": "a1f0c2d4-0004-4a10-9a01-400000000001",
+      "name": "URL Scanner",
+      "description": {
+        "content": "Scan URLs and domains for phishing, malware, parking, and spam.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a1f0c2d4-0004-4a10-9a01-400000000002",
+          "name": "Scan a URL or domain for threats.",
+          "request": {
+            "name": "Scan a URL or domain for threats.",
+            "description": {
+              "content": "Scans a URL or domain for phishing, malware, parking, spam, and suspicious content, returning a risk score and content category.",
+              "type": "text/plain"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/url/{{apiKey}}/https%3A%2F%2Fexample.com?strictness=0",
+              "path": ["url", "{{apiKey}}", "https%3A%2F%2Fexample.com"],
+              "host": ["{{baseUrl}}"],
+              "query": [
+                { "key": "strictness", "value": "0" }
+              ],
+              "variable": []
+            },
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "id": "a1f0c2d4-0005-4a10-9a01-500000000001",
+      "name": "Device Fingerprint",
+      "description": {
+        "content": "Score a device fingerprint to detect bots, emulators, and high-risk behavior.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a1f0c2d4-0005-4a10-9a01-500000000002",
+          "name": "Score a device fingerprint.",
+          "request": {
+            "name": "Score a device fingerprint.",
+            "description": {
+              "content": "Analyzes 300+ data points about a user's device and session to detect bots, emulators, and high-risk behavior.",
+              "type": "text/plain"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/fingerprint/{{apiKey}}",
+              "path": ["fingerprint", "{{apiKey}}"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ip\": \"8.8.8.8\",\n  \"request_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "id": "a1f0c2d4-0006-4a10-9a01-600000000001",
+      "name": "Leaked Data",
+      "description": {
+        "content": "Check emails, phones, usernames, and passwords against breached and dark-web databases.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a1f0c2d4-0006-4a10-9a01-600000000002",
+          "name": "Check data against breached and dark-web databases.",
+          "request": {
+            "name": "Check data against breached and dark-web databases.",
+            "description": {
+              "content": "Checks an email, phone, username, password, or combination against breached and dark-web databases. Submit passwords as a POST parameter or header rather than in the URL.",
+              "type": "text/plain"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/leaked/email/{{apiKey}}?value=user%40example.com",
+              "path": ["leaked", "email", "{{apiKey}}"],
+              "host": ["{{baseUrl}}"],
+              "query": [
+                { "key": "value", "value": "user%40example.com" }
+              ],
+              "variable": []
+            },
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

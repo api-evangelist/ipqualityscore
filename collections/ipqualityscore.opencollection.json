@@ -1,0 +1,134 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "IPQualityScore API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "in": "path",
+      "key": "api_key"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "IP Reputation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Proxy, VPN, Tor, and IP reputation lookup.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.ipqualityscore.com/api/json/ip/{api_key}/{ip}"
+          },
+          "docs": "Scores an IP address for proxy, VPN, and Tor usage, bot status, recent abuse, and abuse velocity. Adding transaction parameters returns a transaction_details object (Transaction Scoring)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Email Validation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Validate an email address.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.ipqualityscore.com/api/json/email/{api_key}/{email}"
+          },
+          "docs": "Verifies an email address for validity, deliverability, disposable/temporary domains, spam traps, honeypots, and recent abuse."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Phone Validation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Validate a phone number.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.ipqualityscore.com/api/json/phone/{api_key}/{phone}"
+          },
+          "docs": "Validates a phone number returning carrier, line type, active status, geolocation, and a fraud score."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "URL Scanner",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Scan a URL or domain for threats.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.ipqualityscore.com/api/json/url/{api_key}/{url}"
+          },
+          "docs": "Scans a URL or domain for phishing, malware, parking, spam, and suspicious content, returning a risk score and content category."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Device Fingerprint",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Score a device fingerprint.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.ipqualityscore.com/api/json/fingerprint/{api_key}",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Analyzes 300+ data points about a user's device and session to detect bots, emulators, and high-risk behavior."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Leaked Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Check data against breached and dark-web databases.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.ipqualityscore.com/api/json/leaked/{type}/{api_key}"
+          },
+          "docs": "Checks an email, phone, username, password, or combination against breached and dark-web databases. Submit passwords as a POST parameter or header rather than in the URL."
+        }
+      ]
+    }
+  ]
+}

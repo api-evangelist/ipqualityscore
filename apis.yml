@@ -1,0 +1,168 @@
+aid: ipqualityscore
+url: https://raw.githubusercontent.com/api-evangelist/ipqualityscore/refs/heads/main/apis.yml
+name: IPQualityScore
+kind: company
+description: IPQualityScore (IPQS) provides real-time fraud prevention and threat
+  intelligence APIs covering proxy/VPN/Tor and IP reputation scoring, email and phone
+  validation, malicious URL and domain scanning, device fingerprinting, transaction
+  risk scoring, and dark-web leaked-data checks. All endpoints are delivered as a
+  simple REST/JSON interface with the API key passed in the request path.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Fraud Prevention
+- IP Reputation
+- Proxy Detection
+- Email Validation
+- Threat Intelligence
+created: '2026-06-25'
+modified: '2026-06-25'
+specificationVersion: '0.19'
+apis:
+- aid: ipqualityscore:ip-reputation-proxy-vpn-api
+  name: IP Reputation & Proxy/VPN Detection API
+  tags:
+  - IP Reputation
+  - Proxy Detection
+  - VPN
+  - Tor
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.ipqualityscore.com/documentation/proxy-detection-api/overview
+  baseURL: https://www.ipqualityscore.com/api/json
+  properties:
+  - url: https://www.ipqualityscore.com/documentation/proxy-detection-api/overview
+    type: Documentation
+  - url: https://www.ipqualityscore.com/documentation/proxy-detection-api/response-parameters
+    type: APIReference
+  - url: openapi/ipqualityscore-openapi.yml
+    type: OpenAPI
+  description: Scores an IP address for proxy, VPN, and Tor usage, bot status, recent
+    abuse, and abuse velocity, returning a 0-100 fraud score plus geolocation and
+    connection metadata. Requested as GET /ip/{api_key}/{ip}.
+- aid: ipqualityscore:email-validation-api
+  name: Email Validation API
+  tags:
+  - Email Validation
+  - Disposable Email
+  - Deliverability
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.ipqualityscore.com/documentation/email-validation-api/overview
+  baseURL: https://www.ipqualityscore.com/api/json
+  properties:
+  - url: https://www.ipqualityscore.com/documentation/email-validation-api/overview
+    type: Documentation
+  - url: https://www.ipqualityscore.com/documentation/email-validation-api/response-parameters
+    type: APIReference
+  - url: openapi/ipqualityscore-openapi.yml
+    type: OpenAPI
+  description: Verifies email addresses for validity, deliverability, disposable/temporary
+    domains, spam traps, honeypots, and recent abuse, returning a fraud score and
+    DNS/MX checks. Requested as GET /email/{api_key}/{email}.
+- aid: ipqualityscore:phone-validation-api
+  name: Phone Number Validation API
+  tags:
+  - Phone Validation
+  - Carrier Lookup
+  - Line Type
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.ipqualityscore.com/documentation/phone-number-validation-api/overview
+  baseURL: https://www.ipqualityscore.com/api/json
+  properties:
+  - url: https://www.ipqualityscore.com/documentation/phone-number-validation-api/overview
+    type: Documentation
+  - url: https://www.ipqualityscore.com/documentation/phone-number-validation-api/response-parameters
+    type: APIReference
+  - url: openapi/ipqualityscore-openapi.yml
+    type: OpenAPI
+  description: Validates phone numbers across 150+ countries, returning carrier, line
+    type (mobile, VOIP, landline, prepaid), active status, geolocation, and a fraud
+    score. Requested as GET /phone/{api_key}/{phone}.
+- aid: ipqualityscore:malicious-url-scanner-api
+  name: Malicious URL Scanner API
+  tags:
+  - URL Scanner
+  - Phishing
+  - Malware
+  - Domain Reputation
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.ipqualityscore.com/documentation/malicious-url-scanner-api/overview
+  baseURL: https://www.ipqualityscore.com/api/json
+  properties:
+  - url: https://www.ipqualityscore.com/documentation/malicious-url-scanner-api/overview
+    type: Documentation
+  - url: https://www.ipqualityscore.com/documentation/malicious-url-scanner-api/response-parameters
+    type: APIReference
+  - url: openapi/ipqualityscore-openapi.yml
+    type: OpenAPI
+  description: Scans URLs and domains for phishing, malware, parking, spam, and suspicious
+    content, returning a risk score, domain reputation, and a content category. Requested
+    as GET /url/{api_key}/{url}.
+- aid: ipqualityscore:device-fingerprint-api
+  name: Device Fingerprint API
+  tags:
+  - Device Fingerprinting
+  - Bot Detection
+  - Fraud Prevention
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.ipqualityscore.com/documentation/device-fingerprint-api/overview
+  baseURL: https://www.ipqualityscore.com/api/json
+  properties:
+  - url: https://www.ipqualityscore.com/documentation/device-fingerprint-api/overview
+    type: Documentation
+  - url: openapi/ipqualityscore-openapi.yml
+    type: OpenAPI
+  description: Analyzes 300+ data points about a user's device and session to detect
+    bots, emulators, and high-risk behavior, returning a fraud score and device signals.
+    Requested as POST /fingerprint/{api_key}.
+- aid: ipqualityscore:transaction-scoring-api
+  name: Transaction Scoring API
+  tags:
+  - Transaction Scoring
+  - Payment Fraud
+  - Chargeback Prevention
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.ipqualityscore.com/documentation/proxy-detection-api/transaction-scoring
+  baseURL: https://www.ipqualityscore.com/api/json
+  properties:
+  - url: https://www.ipqualityscore.com/documentation/proxy-detection-api/transaction-scoring
+    type: Documentation
+  - url: openapi/ipqualityscore-openapi.yml
+    type: OpenAPI
+  description: Extends the IP reputation endpoint with optional billing, shipping,
+    payment, and order parameters to score payment and account fraud risk, returning
+    a transaction_details object with risk factors and address/email/phone validation.
+    Requested as GET /ip/{api_key}/{ip} with transaction parameters.
+- aid: ipqualityscore:leaked-data-api
+  name: Leaked Data (Dark Web) API
+  tags:
+  - Dark Web
+  - Data Breach
+  - Leaked Credentials
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.ipqualityscore.com/documentation/dark-web-leak-api/overview
+  baseURL: https://www.ipqualityscore.com/api/json
+  properties:
+  - url: https://www.ipqualityscore.com/documentation/dark-web-leak-api/overview
+    type: Documentation
+  - url: openapi/ipqualityscore-openapi.yml
+    type: OpenAPI
+  description: Checks emails, phone numbers, usernames, passwords, and combinations
+    against breached and dark-web databases, returning exposure status, breach sources,
+    and first-seen timestamps. Requested as GET /leaked/{type}/{api_key}.
+common:
+- type: GitHubOrganization
+  url: https://github.com/IPQualityScore
+- type: LinkedIn
+  url: https://www.linkedin.com/company/ipqualityscore
+- type: Website
+  url: https://www.ipqualityscore.com
+- type: Documentation
+  url: https://www.ipqualityscore.com/documentation/overview
+- type: Plans
+  url: plans/ipqualityscore-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/ipqualityscore-rate-limits.yml
+- type: FinOps
+  url: finops/ipqualityscore-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

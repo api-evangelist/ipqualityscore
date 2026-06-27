@@ -1,0 +1,65 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: IPQualityScore
+providerId: ipqualityscore
+created: '2026-06-25'
+modified: '2026-06-25'
+reconciled: false
+tags:
+- Fraud Prevention
+- IP Reputation
+- Proxy Detection
+- Email Validation
+- Threat Intelligence
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  IPQualityScore meters usage primarily by monthly and daily lookup quotas tied
+  to the account plan, where each fraud-detection API request consumes one
+  lookup. Paid plans also publish a per-second request rate limit (for example,
+  20 lookups/second on SMB Basic). Exceeding the lookup quota or request rate
+  returns an unsuccessful response with success=false and an explanatory
+  message. Specific per-second limits above the published tiers are not
+  reconciled in this artifact.
+notes: >-
+  Verify per-plan monthly lookup quotas, daily caps, and per-second rate limits
+  on the IPQualityScore plans page during reconciliation; limits rise as
+  accounts move between Free, Startup, SMB, and Enterprise tiers.
+sources:
+- https://www.ipqualityscore.com/plans
+- https://www.ipqualityscore.com/documentation/overview
+responseCodes:
+  throttled: 429
+limits:
+- name: Monthly Lookups
+  scope: account
+  metric: lookups
+  limit: varies by plan (1,000 Free to custom Enterprise)
+  notes: Each API request consumes one lookup against the monthly quota.
+- name: Daily Lookups
+  scope: account
+  metric: lookups
+  limit: varies by plan (35/day Free, 250/day Startup)
+  notes: Daily cap applied on top of the monthly quota on lower tiers.
+- name: Requests Per Second
+  scope: account
+  metric: requests
+  limit: see provider documentation (e.g., 20/second on SMB Basic)
+  notes: Per-second request rate limit published per paid plan.
+- name: Custom Rules
+  scope: account
+  metric: rules
+  limit: varies by plan (10 Free to 25,000 Enterprise)
+  notes: Maximum number of custom scoring/decision rules per account.
+policies:
+- name: Tiered Limits
+  description: Lookup quotas and request rates increase as accounts move from Free to paid and Enterprise plans.
+- name: Quota Enforcement
+  description: Requests beyond the lookup quota return success=false with an explanatory message rather than billable data.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter and honor throttling responses.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

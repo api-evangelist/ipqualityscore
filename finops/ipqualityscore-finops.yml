@@ -1,0 +1,114 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: IPQualityScore
+providerId: ipqualityscore
+created: '2026-06-25'
+modified: '2026-06-25'
+reconciled: true
+tags:
+- Fraud Prevention
+- IP Reputation
+- Proxy Detection
+- Email Validation
+- Threat Intelligence
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of IPQualityScore spend. IPQS bills via fixed monthly plan
+  subscriptions (Free, Startup, SMB Basic, SMB+, Enterprise) that each include a
+  bundled monthly lookup allotment. Every fraud-detection API request - IP
+  reputation, email, phone, URL, transaction scoring, device fingerprint, or
+  leaked-data check - consumes one lookup against that allotment, making
+  lookup volume the primary cost driver. Higher tiers raise included lookups,
+  per-second rate limits, and unlock premium features.
+notes: >-
+  Plan prices and included lookup volumes are subject to change; verify against
+  the IPQualityScore plans page during reconciliation.
+sources:
+- https://www.ipqualityscore.com/plans
+- https://www.ipqualityscore.com/documentation/overview
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: IPQualityScore
+serviceCategory: Identity and Security
+billingModel:
+  pricingCategory: Subscription-Based
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+  - Usage
+  - Purchase
+  - Adjustment
+focusColumns:
+  ServiceName: IPQualityScore Fraud Prevention
+  ServiceCategory: Identity and Security
+  ProviderName: IPQualityScore
+  PublisherName: IPQualityScore
+  InvoiceIssuerName: IPQualityScore
+  BillingCurrency: USD
+  ChargeCategory: Usage
+  PricingCategory: Subscription-Based
+meters:
+- name: monthly_lookups
+  description: Total fraud-detection API requests consumed against the plan's monthly lookup allotment.
+  unit: lookups
+  aggregation: sum
+  dimensions:
+  - account
+  - api
+- name: plan_subscription
+  description: Fixed monthly subscription fee for the active plan tier.
+  unit: months
+  aggregation: sum
+  dimensions:
+  - account
+  - plan
+- name: ip_lookups
+  description: IP reputation / proxy-VPN-Tor and transaction-scoring requests.
+  unit: lookups
+  aggregation: sum
+  dimensions:
+  - account
+- name: email_lookups
+  description: Email validation requests.
+  unit: lookups
+  aggregation: sum
+  dimensions:
+  - account
+- name: phone_lookups
+  description: Phone validation requests.
+  unit: lookups
+  aggregation: sum
+  dimensions:
+  - account
+- name: url_lookups
+  description: Malicious URL scanner requests.
+  unit: lookups
+  aggregation: sum
+  dimensions:
+  - account
+- name: leaked_data_lookups
+  description: Dark-web / leaked-data check requests.
+  unit: lookups
+  aggregation: sum
+  dimensions:
+  - account
+principles:
+- name: Visibility
+  description: Track lookup consumption per API in the IPQS dashboard against the plan's monthly allotment.
+- name: Allocation
+  description: Use separate API keys and custom rules per workload/team to map lookup spend to cost centers.
+- name: Optimization
+  description: Use the fast flag and appropriate strictness to avoid wasted lookups; cache stable results; right-size the plan tier to actual monthly lookup volume.
+- name: Accountability
+  description: Assign owners per key/workload and review monthly lookup burn against the included allotment before the next billing cycle.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,239 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: IPQualityScore
+providerId: ipqualityscore
+created: '2026-06-25'
+modified: '2026-06-25'
+reconciled: true
+tags:
+- Fraud Prevention
+- IP Reputation
+- Proxy Detection
+- Email Validation
+- Threat Intelligence
+- Plans
+description: >-
+  IPQualityScore publishes transparent self-service plans metered by monthly
+  lookups, where each fraud-detection API request (IP, email, phone, URL,
+  transaction, leaked-data) consumes one lookup. A Free tier offers 1,000
+  lookups/month; paid Startup, SMB Basic, and SMB+ tiers raise lookup volume,
+  rate limits, custom rules, and unlock features such as transaction scoring,
+  address verification, and residential proxy detection. Enterprise adds device
+  fingerprinting, mobile SDK, and dedicated infrastructure with custom pricing.
+notes: >-
+  Lookup volumes and prices are as published on the IPQualityScore plans page
+  and are subject to change; verify against the live page during reconciliation.
+  Paid plans are contract-free with prorated upgrades and downgrades.
+sources:
+- https://www.ipqualityscore.com/plans
+- https://www.ipqualityscore.com/documentation/overview
+plans:
+- id: ipqualityscore-free
+  name: Free
+  type: free
+  description: >-
+    Free self-service plan with 1,000 monthly lookups across the core fraud
+    APIs, no credit card required.
+  entries:
+  - label: Monthly Lookups
+    name: monthly_lookups
+    type: usage
+    metric: lookups
+    limit: 1000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $0
+    userMultiplied: false
+  - label: Daily Lookups
+    name: daily_lookups
+    type: usage
+    metric: lookups
+    limit: 35
+    timeFrame: day
+    geo: global
+    unit: 1
+    price: $0
+    userMultiplied: false
+  - label: Custom Rules
+    name: custom_rules
+    type: flat
+    metric: rules
+    limit: 10
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: included
+    userMultiplied: false
+  elements:
+  - name: IP Reputation
+  - name: Email Validation
+  - name: Phone Validation
+  - name: Malicious URL Scanner
+- id: ipqualityscore-startup
+  name: Startup
+  type: paid
+  description: >-
+    Entry paid plan starting at $99/month with 5,000 monthly lookups and all
+    Free-tier features.
+  entries:
+  - label: Monthly Subscription
+    name: subscription
+    type: flat
+    metric: subscription
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: from $99/month
+    userMultiplied: false
+  - label: Monthly Lookups
+    name: monthly_lookups
+    type: usage
+    metric: lookups
+    limit: 5000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: included
+    userMultiplied: false
+  - label: Daily Lookups
+    name: daily_lookups
+    type: usage
+    metric: lookups
+    limit: 250
+    timeFrame: day
+    geo: global
+    unit: 1
+    price: included
+    userMultiplied: false
+  - label: Custom Rules
+    name: custom_rules
+    type: flat
+    metric: rules
+    limit: 100
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: included
+    userMultiplied: false
+  elements:
+  - name: All Free features
+- id: ipqualityscore-smb-basic
+  name: SMB Basic
+  type: paid
+  description: >-
+    Small-business plan starting at $499/month with 10,000 monthly lookups, a
+    20 lookups/second rate limit, and transaction scoring.
+  entries:
+  - label: Monthly Subscription
+    name: subscription
+    type: flat
+    metric: subscription
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: from $499/month
+    userMultiplied: false
+  - label: Monthly Lookups
+    name: monthly_lookups
+    type: usage
+    metric: lookups
+    limit: 10000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: included
+    userMultiplied: false
+  - label: Custom Rules
+    name: custom_rules
+    type: flat
+    metric: rules
+    limit: 1000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: included
+    userMultiplied: false
+  elements:
+  - name: Transaction Scoring
+  - name: Extra Scoring Settings
+- id: ipqualityscore-smb-plus
+  name: SMB+
+  type: paid
+  description: >-
+    Most popular plan starting at $999/month with 75,000 monthly lookups, a
+    99.5% uptime SLA, address verification, reverse identity, and residential
+    proxy detection.
+  entries:
+  - label: Monthly Subscription
+    name: subscription
+    type: flat
+    metric: subscription
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: from $999/month
+    userMultiplied: false
+  - label: Monthly Lookups
+    name: monthly_lookups
+    type: usage
+    metric: lookups
+    limit: 75000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: included
+    userMultiplied: false
+  - label: Custom Rules
+    name: custom_rules
+    type: flat
+    metric: rules
+    limit: 5000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: included
+    userMultiplied: false
+  elements:
+  - name: Address Verification
+  - name: Reverse Identity Checks
+  - name: Residential Proxy Detection
+- id: ipqualityscore-enterprise
+  name: Enterprise
+  type: enterprise
+  description: >-
+    Custom-priced plan with custom lookup allocation, 99.9% uptime SLA, device
+    fingerprinting, mobile SDK, and dedicated infrastructure. Contact sales.
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  - label: Custom Rules
+    name: custom_rules
+    type: flat
+    metric: rules
+    limit: 25000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: included
+    userMultiplied: false
+  elements:
+  - name: Device Fingerprinting
+  - name: Mobile SDK
+  - name: Dedicated Infrastructure
+  - name: Enterprise Support
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

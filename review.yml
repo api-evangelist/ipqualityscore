@@ -1,0 +1,59 @@
+aid: ipqualityscore
+name: IPQualityScore
+review:
+  question: Does IPQualityScore expose a documented public WebSocket API?
+  answer: false
+  date: '2026-06-25'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was created. IPQualityScore's documented public API
+    surface is request/response REST/JSON only, with no streaming, Server-Sent
+    Events, or WebSocket transport documented. There is therefore no
+    event-driven or streaming surface to model with AsyncAPI.
+findings:
+  summary: |
+    IPQualityScore (IPQS) does not publish a documented public WebSocket API.
+    The platform exposes synchronous REST/JSON endpoints under
+    https://www.ipqualityscore.com/api/json, with the API key passed as a path
+    parameter. Fraud-detection products - IP reputation / proxy-VPN-Tor, email
+    validation, phone validation, malicious URL scanner, device fingerprint,
+    transaction scoring, and dark-web leaked-data checks - are all delivered as
+    single request/response HTTPS calls. No realtime, bidirectional, or
+    streaming WebSocket (ws:// or wss://) endpoint is documented. Client-side
+    device fingerprinting is delivered via JavaScript and mobile SDKs that
+    ultimately submit data to the same REST endpoints, not over WebSocket.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://www.ipqualityscore.com/api/json
+      documented: true
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented in any IPQualityScore product or API reference page as of the review date.
+  endpointsConfirmedRest:
+    - GET  https://www.ipqualityscore.com/api/json/ip/{api_key}/{ip}
+    - GET  https://www.ipqualityscore.com/api/json/email/{api_key}/{email}
+    - GET  https://www.ipqualityscore.com/api/json/phone/{api_key}/{phone}
+    - GET  https://www.ipqualityscore.com/api/json/url/{api_key}/{url}
+    - POST https://www.ipqualityscore.com/api/json/fingerprint/{api_key}
+    - GET  https://www.ipqualityscore.com/api/json/leaked/{type}/{api_key}
+  sources:
+    - url: https://www.ipqualityscore.com/documentation/overview
+      type: Documentation
+      note: API overview lists REST/JSON products; no WebSocket mentioned.
+    - url: https://www.ipqualityscore.com/documentation/proxy-detection-api/overview
+      type: Documentation
+      note: IP reputation lookup is a GET request to /api/json/ip/{api_key}/{ip}.
+    - url: https://www.ipqualityscore.com/documentation/dark-web-leak-api/overview
+      type: Documentation
+      note: Leaked-data checks are GET requests to /api/json/leaked/{type}/{api_key}; no streaming.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket or streaming protocol surface exists. IPQualityScore's public
+    API is synchronous REST/JSON only, so no AsyncAPI document was authored.
+    The apis.yml catalogs the documented REST products and their OpenAPI
+    description.
