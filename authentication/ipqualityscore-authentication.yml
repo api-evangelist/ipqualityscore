@@ -1,0 +1,16 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/ipqualityscore-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - path
+schemes:
+- name: ApiKeyPath
+  type: apiKey
+  in: path
+  parameter: api_key
+  description: IPQualityScore API key passed as a path parameter on each request.
+  sources:
+  - openapi/ipqualityscore-openapi.yml

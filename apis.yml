@@ -149,6 +149,10 @@ apis:
     against breached and dark-web databases, returning exposure status, breach sources,
     and first-seen timestamps. Requested as GET /leaked/{type}/{api_key}.
 common:
+- type: DomainSecurity
+  url: security/ipqualityscore-domain-security.yml
+- type: Authentication
+  url: authentication/ipqualityscore-authentication.yml
 - type: GitHubOrganization
   url: https://github.com/IPQualityScore
 - type: LinkedIn
