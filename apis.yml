@@ -149,6 +149,8 @@ apis:
     against breached and dark-web databases, returning exposure status, breach sources,
     and first-seen timestamps. Requested as GET /leaked/{type}/{api_key}.
 common:
+- type: AgenticAccess
+  url: agentic-access/ipqualityscore-agentic-access.yml
 - type: DomainSecurity
   url: security/ipqualityscore-domain-security.yml
 - type: Authentication
