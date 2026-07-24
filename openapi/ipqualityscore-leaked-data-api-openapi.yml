@@ -1,0 +1,82 @@
+openapi: 3.0.1
+info:
+  title: IPQualityScore Device Fingerprint Leaked Data API
+  description: Real-time fraud prevention and threat intelligence API from IPQualityScore (IPQS). Covers proxy/VPN/Tor and IP reputation scoring, email and phone validation, malicious URL scanning, device fingerprinting, transaction risk scoring, and dark-web leaked-data checks. The API key is passed as a path parameter and responses are returned as JSON.
+  termsOfService: https://www.ipqualityscore.com/terms-of-service
+  contact:
+    name: IPQualityScore Support
+    url: https://www.ipqualityscore.com/contact
+  version: '1.0'
+servers:
+- url: https://www.ipqualityscore.com/api/json
+security:
+- ApiKeyPath: []
+tags:
+- name: Leaked Data
+paths:
+  /leaked/{type}/{api_key}:
+    get:
+      operationId: leakedData
+      tags:
+      - Leaked Data
+      summary: Check data against breached and dark-web databases.
+      description: Checks an email, phone, username, password, or combination against breached and dark-web databases, returning exposure status, breach sources, and first-seen timestamps.
+      parameters:
+      - name: type
+        in: path
+        required: true
+        description: Lookup type.
+        schema:
+          type: string
+          enum:
+          - email
+          - password
+          - username
+          - emailpass
+          - userpass
+      - name: api_key
+        in: path
+        required: true
+        description: Your IPQualityScore API key.
+        schema:
+          type: string
+      - name: value
+        in: query
+        required: false
+        description: The value to check. Passwords should be submitted as a POST parameter or header rather than in the URL for security.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LeakedDataResponse'
+components:
+  schemas:
+    LeakedDataResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+        exposed:
+          type: boolean
+        plain_text_password:
+          type: boolean
+        source:
+          type: array
+          items:
+            type: string
+        first_seen:
+          type: object
+        request_id:
+          type: string
+  securitySchemes:
+    ApiKeyPath:
+      type: apiKey
+      in: path
+      name: api_key
+      description: IPQualityScore API key passed as a path parameter on each request.

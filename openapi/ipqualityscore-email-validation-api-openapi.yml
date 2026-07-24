@@ -1,0 +1,126 @@
+openapi: 3.0.1
+info:
+  title: IPQualityScore Device Fingerprint Email Validation API
+  description: Real-time fraud prevention and threat intelligence API from IPQualityScore (IPQS). Covers proxy/VPN/Tor and IP reputation scoring, email and phone validation, malicious URL scanning, device fingerprinting, transaction risk scoring, and dark-web leaked-data checks. The API key is passed as a path parameter and responses are returned as JSON.
+  termsOfService: https://www.ipqualityscore.com/terms-of-service
+  contact:
+    name: IPQualityScore Support
+    url: https://www.ipqualityscore.com/contact
+  version: '1.0'
+servers:
+- url: https://www.ipqualityscore.com/api/json
+security:
+- ApiKeyPath: []
+tags:
+- name: Email Validation
+paths:
+  /email/{api_key}/{email}:
+    get:
+      operationId: emailValidation
+      tags:
+      - Email Validation
+      summary: Validate an email address.
+      description: Verifies an email address for validity, deliverability, disposable or temporary domains, spam traps, honeypots, and recent abuse, returning a fraud score and DNS/MX checks.
+      parameters:
+      - name: api_key
+        in: path
+        required: true
+        description: Your IPQualityScore API key.
+        schema:
+          type: string
+      - name: email
+        in: path
+        required: true
+        description: The URL-encoded email address to validate.
+        schema:
+          type: string
+      - name: timeout
+        in: query
+        required: false
+        description: Seconds to wait for a mailbox provider response (1-60, default 7).
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 60
+      - name: fast
+        in: query
+        required: false
+        description: Prioritize speed over deep verification.
+        schema:
+          type: boolean
+      - name: abuse_strictness
+        in: query
+        required: false
+        description: Adjusts abuse-pattern detection (0-2).
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 2
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmailValidationResponse'
+components:
+  schemas:
+    EmailValidationResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+        valid:
+          type: boolean
+        disposable:
+          type: boolean
+        smtp_score:
+          type: integer
+        overall_score:
+          type: integer
+        first_name:
+          type: string
+        generic:
+          type: boolean
+        common:
+          type: boolean
+        dns_valid:
+          type: boolean
+        honeypot:
+          type: boolean
+        deliverability:
+          type: string
+        frequent_complainer:
+          type: boolean
+        spam_trap_score:
+          type: string
+        catch_all:
+          type: boolean
+        timed_out:
+          type: boolean
+        suspect:
+          type: boolean
+        recent_abuse:
+          type: boolean
+        fraud_score:
+          type: integer
+        suggested_domain:
+          type: string
+        leaked:
+          type: boolean
+        domain_age:
+          type: object
+        first_seen:
+          type: object
+        sanitized_email:
+          type: string
+        request_id:
+          type: string
+  securitySchemes:
+    ApiKeyPath:
+      type: apiKey
+      in: path
+      name: api_key
+      description: IPQualityScore API key passed as a path parameter on each request.

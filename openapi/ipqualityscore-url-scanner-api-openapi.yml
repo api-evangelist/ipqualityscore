@@ -1,0 +1,106 @@
+openapi: 3.0.1
+info:
+  title: IPQualityScore Device Fingerprint URL Scanner API
+  description: Real-time fraud prevention and threat intelligence API from IPQualityScore (IPQS). Covers proxy/VPN/Tor and IP reputation scoring, email and phone validation, malicious URL scanning, device fingerprinting, transaction risk scoring, and dark-web leaked-data checks. The API key is passed as a path parameter and responses are returned as JSON.
+  termsOfService: https://www.ipqualityscore.com/terms-of-service
+  contact:
+    name: IPQualityScore Support
+    url: https://www.ipqualityscore.com/contact
+  version: '1.0'
+servers:
+- url: https://www.ipqualityscore.com/api/json
+security:
+- ApiKeyPath: []
+tags:
+- name: URL Scanner
+paths:
+  /url/{api_key}/{url}:
+    get:
+      operationId: maliciousUrlScanner
+      tags:
+      - URL Scanner
+      summary: Scan a URL or domain for threats.
+      description: Scans a URL or domain for phishing, malware, parking, spam, and suspicious content, returning a risk score, domain reputation, and a content category.
+      parameters:
+      - name: api_key
+        in: path
+        required: true
+        description: Your IPQualityScore API key.
+        schema:
+          type: string
+      - name: url
+        in: path
+        required: true
+        description: The URL-encoded URL or domain to scan.
+        schema:
+          type: string
+      - name: strictness
+        in: query
+        required: false
+        description: Adjusts sensitivity (0-2). 0 is least strict and recommended.
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 2
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UrlScannerResponse'
+components:
+  schemas:
+    UrlScannerResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+        unsafe:
+          type: boolean
+        domain:
+          type: string
+        ip_address:
+          type: string
+        server:
+          type: string
+        content_type:
+          type: string
+        status_code:
+          type: integer
+        page_size:
+          type: integer
+        domain_rank:
+          type: integer
+        dns_valid:
+          type: boolean
+        parking:
+          type: boolean
+        spamming:
+          type: boolean
+        malware:
+          type: boolean
+        phishing:
+          type: boolean
+        suspicious:
+          type: boolean
+        adult:
+          type: boolean
+        risk_score:
+          type: integer
+        country_code:
+          type: string
+        category:
+          type: string
+        domain_age:
+          type: object
+        request_id:
+          type: string
+  securitySchemes:
+    ApiKeyPath:
+      type: apiKey
+      in: path
+      name: api_key
+      description: IPQualityScore API key passed as a path parameter on each request.

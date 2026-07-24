@@ -1,0 +1,97 @@
+openapi: 3.0.1
+info:
+  title: IPQualityScore Device Fingerprint API
+  description: Real-time fraud prevention and threat intelligence API from IPQualityScore (IPQS). Covers proxy/VPN/Tor and IP reputation scoring, email and phone validation, malicious URL scanning, device fingerprinting, transaction risk scoring, and dark-web leaked-data checks. The API key is passed as a path parameter and responses are returned as JSON.
+  termsOfService: https://www.ipqualityscore.com/terms-of-service
+  contact:
+    name: IPQualityScore Support
+    url: https://www.ipqualityscore.com/contact
+  version: '1.0'
+servers:
+- url: https://www.ipqualityscore.com/api/json
+security:
+- ApiKeyPath: []
+tags:
+- name: Device Fingerprint
+paths:
+  /fingerprint/{api_key}:
+    post:
+      operationId: deviceFingerprint
+      tags:
+      - Device Fingerprint
+      summary: Score a device fingerprint.
+      description: Analyzes 300+ data points about a user's device and session to detect bots, emulators, and high-risk behavior, returning a fraud score and device signals.
+      parameters:
+      - name: api_key
+        in: path
+        required: true
+        description: Your IPQualityScore API key.
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FingerprintRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FingerprintResponse'
+components:
+  schemas:
+    FingerprintResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+        fraud_chance:
+          type: integer
+        device_id:
+          type: string
+        bot_status:
+          type: boolean
+        is_crawler:
+          type: boolean
+        recent_abuse:
+          type: boolean
+        fraud_score:
+          type: integer
+        connection_type:
+          type: string
+        operating_system:
+          type: string
+        browser:
+          type: string
+        device_brand:
+          type: string
+        device_model:
+          type: string
+        request_id:
+          type: string
+    FingerprintRequest:
+      type: object
+      properties:
+        ip:
+          type: string
+          description: The user's IP address.
+        request_id:
+          type: string
+          description: Device fingerprint request identifier from the client SDK.
+        device_id:
+          type: string
+        user_agent:
+          type: string
+        transaction_details:
+          type: object
+  securitySchemes:
+    ApiKeyPath:
+      type: apiKey
+      in: path
+      name: api_key
+      description: IPQualityScore API key passed as a path parameter on each request.

@@ -1,0 +1,165 @@
+openapi: 3.0.1
+info:
+  title: IPQualityScore Device Fingerprint IP Reputation API
+  description: Real-time fraud prevention and threat intelligence API from IPQualityScore (IPQS). Covers proxy/VPN/Tor and IP reputation scoring, email and phone validation, malicious URL scanning, device fingerprinting, transaction risk scoring, and dark-web leaked-data checks. The API key is passed as a path parameter and responses are returned as JSON.
+  termsOfService: https://www.ipqualityscore.com/terms-of-service
+  contact:
+    name: IPQualityScore Support
+    url: https://www.ipqualityscore.com/contact
+  version: '1.0'
+servers:
+- url: https://www.ipqualityscore.com/api/json
+security:
+- ApiKeyPath: []
+tags:
+- name: IP Reputation
+paths:
+  /ip/{api_key}/{ip}:
+    get:
+      operationId: proxyDetection
+      tags:
+      - IP Reputation
+      summary: Proxy, VPN, Tor, and IP reputation lookup.
+      description: Scores an IP address for proxy, VPN, and Tor usage, bot status, recent abuse, and abuse velocity, returning a 0-100 fraud score plus geolocation and connection metadata. Adding optional billing, shipping, payment, and order parameters enables Transaction Scoring, returning an additional transaction_details object.
+      parameters:
+      - name: api_key
+        in: path
+        required: true
+        description: Your IPQualityScore API key.
+        schema:
+          type: string
+      - name: ip
+        in: path
+        required: true
+        description: The IPv4 or IPv6 address to look up.
+        schema:
+          type: string
+      - name: strictness
+        in: query
+        required: false
+        description: Adjusts lookup depth and sensitivity (0-3). 1 is recommended.
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 3
+      - name: user_agent
+        in: query
+        required: false
+        description: User's browser user agent for improved accuracy.
+        schema:
+          type: string
+      - name: user_language
+        in: query
+        required: false
+        description: User's preferred language (e.g., en-US).
+        schema:
+          type: string
+      - name: allow_public_access_points
+        in: query
+        required: false
+        description: Bypass checks for public access points such as universities.
+        schema:
+          type: boolean
+      - name: order_amount
+        in: query
+        required: false
+        description: Transaction Scoring - the order amount for the transaction.
+        schema:
+          type: number
+      - name: billing_email
+        in: query
+        required: false
+        description: Transaction Scoring - billing email address.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProxyDetectionResponse'
+components:
+  schemas:
+    TransactionDetails:
+      type: object
+      properties:
+        risk_score:
+          type: integer
+        risk_factors:
+          type: array
+          items:
+            type: string
+        valid_billing_address:
+          type: boolean
+        valid_shipping_address:
+          type: boolean
+        valid_billing_email:
+          type: boolean
+        valid_shipping_email:
+          type: boolean
+        valid_billing_phone:
+          type: boolean
+        fraudulent_behavior:
+          type: boolean
+        risky_username:
+          type: boolean
+        is_prepaid_card:
+          type: boolean
+    ProxyDetectionResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+        fraud_score:
+          type: integer
+        country_code:
+          type: string
+        region:
+          type: string
+        city:
+          type: string
+        ISP:
+          type: string
+        ASN:
+          type: integer
+        organization:
+          type: string
+        latitude:
+          type: number
+        longitude:
+          type: number
+        is_crawler:
+          type: boolean
+        connection_type:
+          type: string
+        proxy:
+          type: boolean
+        vpn:
+          type: boolean
+        tor:
+          type: boolean
+        active_vpn:
+          type: boolean
+        active_tor:
+          type: boolean
+        recent_abuse:
+          type: boolean
+        bot_status:
+          type: boolean
+        abuse_velocity:
+          type: string
+        mobile:
+          type: boolean
+        request_id:
+          type: string
+        transaction_details:
+          $ref: '#/components/schemas/TransactionDetails'
+  securitySchemes:
+    ApiKeyPath:
+      type: apiKey
+      in: path
+      name: api_key
+      description: IPQualityScore API key passed as a path parameter on each request.

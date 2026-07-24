@@ -1,0 +1,114 @@
+openapi: 3.0.1
+info:
+  title: IPQualityScore Device Fingerprint Phone Validation API
+  description: Real-time fraud prevention and threat intelligence API from IPQualityScore (IPQS). Covers proxy/VPN/Tor and IP reputation scoring, email and phone validation, malicious URL scanning, device fingerprinting, transaction risk scoring, and dark-web leaked-data checks. The API key is passed as a path parameter and responses are returned as JSON.
+  termsOfService: https://www.ipqualityscore.com/terms-of-service
+  contact:
+    name: IPQualityScore Support
+    url: https://www.ipqualityscore.com/contact
+  version: '1.0'
+servers:
+- url: https://www.ipqualityscore.com/api/json
+security:
+- ApiKeyPath: []
+tags:
+- name: Phone Validation
+paths:
+  /phone/{api_key}/{phone}:
+    get:
+      operationId: phoneValidation
+      tags:
+      - Phone Validation
+      summary: Validate a phone number.
+      description: Validates a phone number across 150+ countries, returning carrier, line type, active status, geolocation, and a fraud score.
+      parameters:
+      - name: api_key
+        in: path
+        required: true
+        description: Your IPQualityScore API key.
+        schema:
+          type: string
+      - name: phone
+        in: path
+        required: true
+        description: The phone number to validate.
+        schema:
+          type: string
+      - name: country
+        in: query
+        required: false
+        description: Comma-separated country codes to prefer for verification (e.g., US,CA).
+        schema:
+          type: string
+      - name: strictness
+        in: query
+        required: false
+        description: Adjusts verification requirements (0-2).
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 2
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PhoneValidationResponse'
+components:
+  schemas:
+    PhoneValidationResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+        valid:
+          type: boolean
+        active:
+          type: boolean
+        formatted:
+          type: string
+        local_format:
+          type: string
+        fraud_score:
+          type: integer
+        recent_abuse:
+          type: boolean
+        VOIP:
+          type: boolean
+        prepaid:
+          type: boolean
+        risky:
+          type: boolean
+        name:
+          type: string
+        carrier:
+          type: string
+        line_type:
+          type: string
+        country:
+          type: string
+        region:
+          type: string
+        city:
+          type: string
+        zip_code:
+          type: string
+        dialing_code:
+          type: integer
+        active_status:
+          type: string
+        leaked:
+          type: boolean
+        do_not_call:
+          type: boolean
+        request_id:
+          type: string
+  securitySchemes:
+    ApiKeyPath:
+      type: apiKey
+      in: path
+      name: api_key
+      description: IPQualityScore API key passed as a path parameter on each request.
