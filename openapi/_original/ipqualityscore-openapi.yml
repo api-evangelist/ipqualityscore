@@ -1,0 +1,594 @@
+openapi: 3.0.1
+info:
+  title: IPQualityScore API
+  description: >-
+    Real-time fraud prevention and threat intelligence API from IPQualityScore
+    (IPQS). Covers proxy/VPN/Tor and IP reputation scoring, email and phone
+    validation, malicious URL scanning, device fingerprinting, transaction risk
+    scoring, and dark-web leaked-data checks. The API key is passed as a path
+    parameter and responses are returned as JSON.
+  termsOfService: https://www.ipqualityscore.com/terms-of-service
+  contact:
+    name: IPQualityScore Support
+    url: https://www.ipqualityscore.com/contact
+  version: '1.0'
+servers:
+  - url: https://www.ipqualityscore.com/api/json
+paths:
+  /ip/{api_key}/{ip}:
+    get:
+      operationId: proxyDetection
+      tags:
+        - IP Reputation
+      summary: Proxy, VPN, Tor, and IP reputation lookup.
+      description: >-
+        Scores an IP address for proxy, VPN, and Tor usage, bot status, recent
+        abuse, and abuse velocity, returning a 0-100 fraud score plus
+        geolocation and connection metadata. Adding optional billing, shipping,
+        payment, and order parameters enables Transaction Scoring, returning an
+        additional transaction_details object.
+      parameters:
+        - name: api_key
+          in: path
+          required: true
+          description: Your IPQualityScore API key.
+          schema:
+            type: string
+        - name: ip
+          in: path
+          required: true
+          description: The IPv4 or IPv6 address to look up.
+          schema:
+            type: string
+        - name: strictness
+          in: query
+          required: false
+          description: Adjusts lookup depth and sensitivity (0-3). 1 is recommended.
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 3
+        - name: user_agent
+          in: query
+          required: false
+          description: User's browser user agent for improved accuracy.
+          schema:
+            type: string
+        - name: user_language
+          in: query
+          required: false
+          description: User's preferred language (e.g., en-US).
+          schema:
+            type: string
+        - name: allow_public_access_points
+          in: query
+          required: false
+          description: Bypass checks for public access points such as universities.
+          schema:
+            type: boolean
+        - name: order_amount
+          in: query
+          required: false
+          description: Transaction Scoring - the order amount for the transaction.
+          schema:
+            type: number
+        - name: billing_email
+          in: query
+          required: false
+          description: Transaction Scoring - billing email address.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProxyDetectionResponse'
+  /email/{api_key}/{email}:
+    get:
+      operationId: emailValidation
+      tags:
+        - Email Validation
+      summary: Validate an email address.
+      description: >-
+        Verifies an email address for validity, deliverability, disposable or
+        temporary domains, spam traps, honeypots, and recent abuse, returning a
+        fraud score and DNS/MX checks.
+      parameters:
+        - name: api_key
+          in: path
+          required: true
+          description: Your IPQualityScore API key.
+          schema:
+            type: string
+        - name: email
+          in: path
+          required: true
+          description: The URL-encoded email address to validate.
+          schema:
+            type: string
+        - name: timeout
+          in: query
+          required: false
+          description: Seconds to wait for a mailbox provider response (1-60, default 7).
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 60
+        - name: fast
+          in: query
+          required: false
+          description: Prioritize speed over deep verification.
+          schema:
+            type: boolean
+        - name: abuse_strictness
+          in: query
+          required: false
+          description: Adjusts abuse-pattern detection (0-2).
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 2
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmailValidationResponse'
+  /phone/{api_key}/{phone}:
+    get:
+      operationId: phoneValidation
+      tags:
+        - Phone Validation
+      summary: Validate a phone number.
+      description: >-
+        Validates a phone number across 150+ countries, returning carrier, line
+        type, active status, geolocation, and a fraud score.
+      parameters:
+        - name: api_key
+          in: path
+          required: true
+          description: Your IPQualityScore API key.
+          schema:
+            type: string
+        - name: phone
+          in: path
+          required: true
+          description: The phone number to validate.
+          schema:
+            type: string
+        - name: country
+          in: query
+          required: false
+          description: Comma-separated country codes to prefer for verification (e.g., US,CA).
+          schema:
+            type: string
+        - name: strictness
+          in: query
+          required: false
+          description: Adjusts verification requirements (0-2).
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 2
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PhoneValidationResponse'
+  /url/{api_key}/{url}:
+    get:
+      operationId: maliciousUrlScanner
+      tags:
+        - URL Scanner
+      summary: Scan a URL or domain for threats.
+      description: >-
+        Scans a URL or domain for phishing, malware, parking, spam, and
+        suspicious content, returning a risk score, domain reputation, and a
+        content category.
+      parameters:
+        - name: api_key
+          in: path
+          required: true
+          description: Your IPQualityScore API key.
+          schema:
+            type: string
+        - name: url
+          in: path
+          required: true
+          description: The URL-encoded URL or domain to scan.
+          schema:
+            type: string
+        - name: strictness
+          in: query
+          required: false
+          description: Adjusts sensitivity (0-2). 0 is least strict and recommended.
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 2
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UrlScannerResponse'
+  /fingerprint/{api_key}:
+    post:
+      operationId: deviceFingerprint
+      tags:
+        - Device Fingerprint
+      summary: Score a device fingerprint.
+      description: >-
+        Analyzes 300+ data points about a user's device and session to detect
+        bots, emulators, and high-risk behavior, returning a fraud score and
+        device signals.
+      parameters:
+        - name: api_key
+          in: path
+          required: true
+          description: Your IPQualityScore API key.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FingerprintRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FingerprintResponse'
+  /leaked/{type}/{api_key}:
+    get:
+      operationId: leakedData
+      tags:
+        - Leaked Data
+      summary: Check data against breached and dark-web databases.
+      description: >-
+        Checks an email, phone, username, password, or combination against
+        breached and dark-web databases, returning exposure status, breach
+        sources, and first-seen timestamps.
+      parameters:
+        - name: type
+          in: path
+          required: true
+          description: Lookup type.
+          schema:
+            type: string
+            enum:
+              - email
+              - password
+              - username
+              - emailpass
+              - userpass
+        - name: api_key
+          in: path
+          required: true
+          description: Your IPQualityScore API key.
+          schema:
+            type: string
+        - name: value
+          in: query
+          required: false
+          description: >-
+            The value to check. Passwords should be submitted as a POST
+            parameter or header rather than in the URL for security.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LeakedDataResponse'
+components:
+  securitySchemes:
+    ApiKeyPath:
+      type: apiKey
+      in: path
+      name: api_key
+      description: IPQualityScore API key passed as a path parameter on each request.
+  schemas:
+    ProxyDetectionResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+        fraud_score:
+          type: integer
+        country_code:
+          type: string
+        region:
+          type: string
+        city:
+          type: string
+        ISP:
+          type: string
+        ASN:
+          type: integer
+        organization:
+          type: string
+        latitude:
+          type: number
+        longitude:
+          type: number
+        is_crawler:
+          type: boolean
+        connection_type:
+          type: string
+        proxy:
+          type: boolean
+        vpn:
+          type: boolean
+        tor:
+          type: boolean
+        active_vpn:
+          type: boolean
+        active_tor:
+          type: boolean
+        recent_abuse:
+          type: boolean
+        bot_status:
+          type: boolean
+        abuse_velocity:
+          type: string
+        mobile:
+          type: boolean
+        request_id:
+          type: string
+        transaction_details:
+          $ref: '#/components/schemas/TransactionDetails'
+    TransactionDetails:
+      type: object
+      properties:
+        risk_score:
+          type: integer
+        risk_factors:
+          type: array
+          items:
+            type: string
+        valid_billing_address:
+          type: boolean
+        valid_shipping_address:
+          type: boolean
+        valid_billing_email:
+          type: boolean
+        valid_shipping_email:
+          type: boolean
+        valid_billing_phone:
+          type: boolean
+        fraudulent_behavior:
+          type: boolean
+        risky_username:
+          type: boolean
+        is_prepaid_card:
+          type: boolean
+    EmailValidationResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+        valid:
+          type: boolean
+        disposable:
+          type: boolean
+        smtp_score:
+          type: integer
+        overall_score:
+          type: integer
+        first_name:
+          type: string
+        generic:
+          type: boolean
+        common:
+          type: boolean
+        dns_valid:
+          type: boolean
+        honeypot:
+          type: boolean
+        deliverability:
+          type: string
+        frequent_complainer:
+          type: boolean
+        spam_trap_score:
+          type: string
+        catch_all:
+          type: boolean
+        timed_out:
+          type: boolean
+        suspect:
+          type: boolean
+        recent_abuse:
+          type: boolean
+        fraud_score:
+          type: integer
+        suggested_domain:
+          type: string
+        leaked:
+          type: boolean
+        domain_age:
+          type: object
+        first_seen:
+          type: object
+        sanitized_email:
+          type: string
+        request_id:
+          type: string
+    PhoneValidationResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+        valid:
+          type: boolean
+        active:
+          type: boolean
+        formatted:
+          type: string
+        local_format:
+          type: string
+        fraud_score:
+          type: integer
+        recent_abuse:
+          type: boolean
+        VOIP:
+          type: boolean
+        prepaid:
+          type: boolean
+        risky:
+          type: boolean
+        name:
+          type: string
+        carrier:
+          type: string
+        line_type:
+          type: string
+        country:
+          type: string
+        region:
+          type: string
+        city:
+          type: string
+        zip_code:
+          type: string
+        dialing_code:
+          type: integer
+        active_status:
+          type: string
+        leaked:
+          type: boolean
+        do_not_call:
+          type: boolean
+        request_id:
+          type: string
+    UrlScannerResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+        unsafe:
+          type: boolean
+        domain:
+          type: string
+        ip_address:
+          type: string
+        server:
+          type: string
+        content_type:
+          type: string
+        status_code:
+          type: integer
+        page_size:
+          type: integer
+        domain_rank:
+          type: integer
+        dns_valid:
+          type: boolean
+        parking:
+          type: boolean
+        spamming:
+          type: boolean
+        malware:
+          type: boolean
+        phishing:
+          type: boolean
+        suspicious:
+          type: boolean
+        adult:
+          type: boolean
+        risk_score:
+          type: integer
+        country_code:
+          type: string
+        category:
+          type: string
+        domain_age:
+          type: object
+        request_id:
+          type: string
+    FingerprintRequest:
+      type: object
+      properties:
+        ip:
+          type: string
+          description: The user's IP address.
+        request_id:
+          type: string
+          description: Device fingerprint request identifier from the client SDK.
+        device_id:
+          type: string
+        user_agent:
+          type: string
+        transaction_details:
+          type: object
+    FingerprintResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+        fraud_chance:
+          type: integer
+        device_id:
+          type: string
+        bot_status:
+          type: boolean
+        is_crawler:
+          type: boolean
+        recent_abuse:
+          type: boolean
+        fraud_score:
+          type: integer
+        connection_type:
+          type: string
+        operating_system:
+          type: string
+        browser:
+          type: string
+        device_brand:
+          type: string
+        device_model:
+          type: string
+        request_id:
+          type: string
+    LeakedDataResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+        exposed:
+          type: boolean
+        plain_text_password:
+          type: boolean
+        source:
+          type: array
+          items:
+            type: string
+        first_seen:
+          type: object
+        request_id:
+          type: string
+security:
+  - ApiKeyPath: []

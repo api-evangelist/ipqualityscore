@@ -1,0 +1,24 @@
+{
+  "provider": "ipqualityscore",
+  "sources": [
+    "ipqualityscore-device-fingerprint-api-openapi.yml",
+    "ipqualityscore-email-validation-api-openapi.yml",
+    "ipqualityscore-ip-reputation-api-openapi.yml",
+    "ipqualityscore-leaked-data-api-openapi.yml",
+    "ipqualityscore-phone-validation-api-openapi.yml",
+    "ipqualityscore-url-scanner-api-openapi.yml"
+  ],
+  "outputs": [
+    "ipqualityscore-device-fingerprint-api-openapi.yml",
+    "ipqualityscore-email-validation-api-openapi.yml",
+    "ipqualityscore-ip-reputation-api-openapi.yml",
+    "ipqualityscore-leaked-data-api-openapi.yml",
+    "ipqualityscore-phone-validation-api-openapi.yml",
+    "ipqualityscore-url-scanner-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
