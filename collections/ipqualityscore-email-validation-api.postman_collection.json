@@ -1,0 +1,193 @@
+{
+  "item": [
+    {
+      "id": "90434b75-0063-4a8e-a355-29c044aa660f",
+      "name": "Email Validation",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4a0ea098-2b74-4207-ad27-8c36c8e4a892",
+          "name": "Validate an email address.",
+          "request": {
+            "name": "Validate an email address.",
+            "description": {
+              "content": "Verifies an email address for validity, deliverability, disposable or temporary domains, spam traps, honeypots, and recent abuse, returning a fraud score and DNS/MX checks.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "email",
+                ":api_key",
+                ":email"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "timeout",
+                  "value": "<integer>",
+                  "description": "Seconds to wait for a mailbox provider response (1-60, default 7)."
+                },
+                {
+                  "disabled": false,
+                  "key": "fast",
+                  "value": "<boolean>",
+                  "description": "Prioritize speed over deep verification."
+                },
+                {
+                  "disabled": false,
+                  "key": "abuse_strictness",
+                  "value": "<integer>",
+                  "description": "Adjusts abuse-pattern detection (0-2)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "api_key",
+                  "description": "(Required) Your IPQualityScore API key."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "email",
+                  "description": "(Required) The URL-encoded email address to validate."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7e366528-5891-49f1-9104-11408a37294e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "email",
+                    ":api_key",
+                    ":email"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "timeout",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "fast",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "abuse_strictness",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "api_key",
+                      "description": "(Required) Your IPQualityScore API key."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "email",
+                      "description": "(Required) The URL-encoded email address to validate."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\",\n  \"valid\": true,\n  \"disposable\": false,\n  \"smtp_score\": 4005,\n  \"overall_score\": 8409,\n  \"first_name\": \"string\",\n  \"generic\": true,\n  \"common\": true,\n  \"dns_valid\": false,\n  \"honeypot\": false,\n  \"deliverability\": \"string\",\n  \"frequent_complainer\": true,\n  \"spam_trap_score\": \"string\",\n  \"catch_all\": true,\n  \"timed_out\": true,\n  \"suspect\": true,\n  \"recent_abuse\": false,\n  \"fraud_score\": 7670,\n  \"suggested_domain\": \"string\",\n  \"leaked\": true,\n  \"domain_age\": {},\n  \"first_seen\": {},\n  \"sanitized_email\": \"string\",\n  \"request_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.ipqualityscore.com/api/json",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "cae72cdf-b22e-4adc-a5b6-594dc99676b3",
+    "name": "IPQualityScore Device Fingerprint Email Validation API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Real-time fraud prevention and threat intelligence API from IPQualityScore (IPQS). Covers proxy/VPN/Tor and IP reputation scoring, email and phone validation, malicious URL scanning, device fingerprinting, transaction risk scoring, and dark-web leaked-data checks. The API key is passed as a path parameter and responses are returned as JSON.\n\nContact Support:\n Name: IPQualityScore Support",
+      "type": "text/plain"
+    }
+  }
+}

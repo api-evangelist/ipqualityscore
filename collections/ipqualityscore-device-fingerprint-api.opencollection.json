@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "IPQualityScore Device Fingerprint API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Device Fingerprint",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Score a device fingerprint.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.ipqualityscore.com/api/json/fingerprint/:api_key",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "path",
+                "description": "Your IPQualityScore API key."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Analyzes 300+ data points about a user's device and session to detect bots, emulators, and high-risk behavior, returning a fraud score and device signals."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

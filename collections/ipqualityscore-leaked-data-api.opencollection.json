@@ -1,0 +1,57 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "IPQualityScore Device Fingerprint Leaked Data API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Leaked Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Check data against breached and dark-web databases.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.ipqualityscore.com/api/json/leaked/:type/:api_key",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "Lookup type."
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "path",
+                "description": "Your IPQualityScore API key."
+              },
+              {
+                "name": "value",
+                "value": "",
+                "type": "query",
+                "description": "The value to check. Passwords should be submitted as a POST parameter or header rather than in the URL for security."
+              }
+            ]
+          },
+          "docs": "Checks an email, phone, username, password, or combination against breached and dark-web databases, returning exposure status, breach sources, and first-seen timestamps."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

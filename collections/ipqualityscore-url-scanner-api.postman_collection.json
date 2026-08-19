@@ -1,0 +1,173 @@
+{
+  "item": [
+    {
+      "id": "2a4585d5-1186-48be-bd17-b2a8cebdb59d",
+      "name": "URL Scanner",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b8321f24-4dfd-41b7-a74c-fb5a64ce2f28",
+          "name": "Scan a URL or domain for threats.",
+          "request": {
+            "name": "Scan a URL or domain for threats.",
+            "description": {
+              "content": "Scans a URL or domain for phishing, malware, parking, spam, and suspicious content, returning a risk score, domain reputation, and a content category.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "url",
+                ":api_key",
+                ":url"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "strictness",
+                  "value": "<integer>",
+                  "description": "Adjusts sensitivity (0-2). 0 is least strict and recommended."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "api_key",
+                  "description": "(Required) Your IPQualityScore API key."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "url",
+                  "description": "(Required) The URL-encoded URL or domain to scan."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "73b368b2-0255-4e17-bc71-92b415cb2eeb",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "url",
+                    ":api_key",
+                    ":url"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "strictness",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "api_key",
+                      "description": "(Required) Your IPQualityScore API key."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "url",
+                      "description": "(Required) The URL-encoded URL or domain to scan."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\",\n  \"unsafe\": false,\n  \"domain\": \"string\",\n  \"ip_address\": \"string\",\n  \"server\": \"string\",\n  \"content_type\": \"string\",\n  \"status_code\": 9563,\n  \"page_size\": 451,\n  \"domain_rank\": 1836,\n  \"dns_valid\": false,\n  \"parking\": false,\n  \"spamming\": true,\n  \"malware\": true,\n  \"phishing\": false,\n  \"suspicious\": true,\n  \"adult\": false,\n  \"risk_score\": 6447,\n  \"country_code\": \"string\",\n  \"category\": \"string\",\n  \"domain_age\": {},\n  \"request_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.ipqualityscore.com/api/json",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8e00e640-c61b-433e-a7ff-9a2f11a1bdf3",
+    "name": "IPQualityScore Device Fingerprint URL Scanner API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Real-time fraud prevention and threat intelligence API from IPQualityScore (IPQS). Covers proxy/VPN/Tor and IP reputation scoring, email and phone validation, malicious URL scanning, device fingerprinting, transaction risk scoring, and dark-web leaked-data checks. The API key is passed as a path parameter and responses are returned as JSON.\n\nContact Support:\n Name: IPQualityScore Support",
+      "type": "text/plain"
+    }
+  }
+}

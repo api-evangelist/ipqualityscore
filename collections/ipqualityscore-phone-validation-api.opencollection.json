@@ -1,0 +1,63 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "IPQualityScore Device Fingerprint Phone Validation API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Phone Validation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Validate a phone number.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.ipqualityscore.com/api/json/phone/:api_key/:phone",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "path",
+                "description": "Your IPQualityScore API key."
+              },
+              {
+                "name": "phone",
+                "value": "",
+                "type": "path",
+                "description": "The phone number to validate."
+              },
+              {
+                "name": "country",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated country codes to prefer for verification (e.g., US,CA)."
+              },
+              {
+                "name": "strictness",
+                "value": "",
+                "type": "query",
+                "description": "Adjusts verification requirements (0-2)."
+              }
+            ]
+          },
+          "docs": "Validates a phone number across 150+ countries, returning carrier, line type, active status, geolocation, and a fraud score."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

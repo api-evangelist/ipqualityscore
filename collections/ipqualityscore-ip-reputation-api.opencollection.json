@@ -1,0 +1,87 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "IPQualityScore Device Fingerprint IP Reputation API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "IP Reputation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Proxy, VPN, Tor, and IP reputation lookup.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.ipqualityscore.com/api/json/ip/:api_key/:ip",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "path",
+                "description": "Your IPQualityScore API key."
+              },
+              {
+                "name": "ip",
+                "value": "",
+                "type": "path",
+                "description": "The IPv4 or IPv6 address to look up."
+              },
+              {
+                "name": "strictness",
+                "value": "",
+                "type": "query",
+                "description": "Adjusts lookup depth and sensitivity (0-3). 1 is recommended."
+              },
+              {
+                "name": "user_agent",
+                "value": "",
+                "type": "query",
+                "description": "User's browser user agent for improved accuracy."
+              },
+              {
+                "name": "user_language",
+                "value": "",
+                "type": "query",
+                "description": "User's preferred language (e.g., en-US)."
+              },
+              {
+                "name": "allow_public_access_points",
+                "value": "",
+                "type": "query",
+                "description": "Bypass checks for public access points such as universities."
+              },
+              {
+                "name": "order_amount",
+                "value": "",
+                "type": "query",
+                "description": "Transaction Scoring - the order amount for the transaction."
+              },
+              {
+                "name": "billing_email",
+                "value": "",
+                "type": "query",
+                "description": "Transaction Scoring - billing email address."
+              }
+            ]
+          },
+          "docs": "Scores an IP address for proxy, VPN, and Tor usage, bot status, recent abuse, and abuse velocity, returning a 0-100 fraud score plus geolocation and connection metadata. Adding optional billing, shipping, payment, and order parameters enables Transaction Scoring, returning an additional transaction_details object."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

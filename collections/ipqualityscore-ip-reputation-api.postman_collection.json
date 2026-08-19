@@ -1,0 +1,223 @@
+{
+  "item": [
+    {
+      "id": "cbf07051-d59f-4ec7-93d4-bbc48f5ea944",
+      "name": "IP Reputation",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "23f35086-a0fe-4235-87f6-e46b29930806",
+          "name": "Proxy, VPN, Tor, and IP reputation lookup.",
+          "request": {
+            "name": "Proxy, VPN, Tor, and IP reputation lookup.",
+            "description": {
+              "content": "Scores an IP address for proxy, VPN, and Tor usage, bot status, recent abuse, and abuse velocity, returning a 0-100 fraud score plus geolocation and connection metadata. Adding optional billing, shipping, payment, and order parameters enables Transaction Scoring, returning an additional transaction_details object.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ip",
+                ":api_key",
+                ":ip"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "strictness",
+                  "value": "<integer>",
+                  "description": "Adjusts lookup depth and sensitivity (0-3). 1 is recommended."
+                },
+                {
+                  "disabled": false,
+                  "key": "user_agent",
+                  "value": "<string>",
+                  "description": "User's browser user agent for improved accuracy."
+                },
+                {
+                  "disabled": false,
+                  "key": "user_language",
+                  "value": "<string>",
+                  "description": "User's preferred language (e.g., en-US)."
+                },
+                {
+                  "disabled": false,
+                  "key": "allow_public_access_points",
+                  "value": "<boolean>",
+                  "description": "Bypass checks for public access points such as universities."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_amount",
+                  "value": "<number>",
+                  "description": "Transaction Scoring - the order amount for the transaction."
+                },
+                {
+                  "disabled": false,
+                  "key": "billing_email",
+                  "value": "<string>",
+                  "description": "Transaction Scoring - billing email address."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "api_key",
+                  "description": "(Required) Your IPQualityScore API key."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ip",
+                  "description": "(Required) The IPv4 or IPv6 address to look up."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "28f5c80a-2fb4-40c2-8f11-0578bfb02079",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ip",
+                    ":api_key",
+                    ":ip"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "strictness",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "user_agent",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_language",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "allow_public_access_points",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "order_amount",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "billing_email",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "api_key",
+                      "description": "(Required) Your IPQualityScore API key."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ip",
+                      "description": "(Required) The IPv4 or IPv6 address to look up."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\",\n  \"fraud_score\": 6460,\n  \"country_code\": \"string\",\n  \"region\": \"string\",\n  \"city\": \"string\",\n  \"ISP\": \"string\",\n  \"ASN\": 7553,\n  \"organization\": \"string\",\n  \"latitude\": 760.9807311212236,\n  \"longitude\": 5292.155857790219,\n  \"is_crawler\": true,\n  \"connection_type\": \"string\",\n  \"proxy\": true,\n  \"vpn\": true,\n  \"tor\": true,\n  \"active_vpn\": true,\n  \"active_tor\": true,\n  \"recent_abuse\": false,\n  \"bot_status\": true,\n  \"abuse_velocity\": \"string\",\n  \"mobile\": false,\n  \"request_id\": \"string\",\n  \"transaction_details\": {\n    \"risk_score\": 3862,\n    \"risk_factors\": [\n      \"string\",\n      \"string\"\n    ],\n    \"valid_billing_address\": false,\n    \"valid_shipping_address\": false,\n    \"valid_billing_email\": false,\n    \"valid_shipping_email\": false,\n    \"valid_billing_phone\": true,\n    \"fraudulent_behavior\": false,\n    \"risky_username\": true,\n    \"is_prepaid_card\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.ipqualityscore.com/api/json",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1f360ff6-fc86-4ec7-b6e6-8a2c3e64740e",
+    "name": "IPQualityScore Device Fingerprint IP Reputation API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Real-time fraud prevention and threat intelligence API from IPQualityScore (IPQS). Covers proxy/VPN/Tor and IP reputation scoring, email and phone validation, malicious URL scanning, device fingerprinting, transaction risk scoring, and dark-web leaked-data checks. The API key is passed as a path parameter and responses are returned as JSON.\n\nContact Support:\n Name: IPQualityScore Support",
+      "type": "text/plain"
+    }
+  }
+}

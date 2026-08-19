@@ -1,0 +1,69 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "IPQualityScore Device Fingerprint Email Validation API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Email Validation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Validate an email address.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.ipqualityscore.com/api/json/email/:api_key/:email",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "path",
+                "description": "Your IPQualityScore API key."
+              },
+              {
+                "name": "email",
+                "value": "",
+                "type": "path",
+                "description": "The URL-encoded email address to validate."
+              },
+              {
+                "name": "timeout",
+                "value": "",
+                "type": "query",
+                "description": "Seconds to wait for a mailbox provider response (1-60, default 7)."
+              },
+              {
+                "name": "fast",
+                "value": "",
+                "type": "query",
+                "description": "Prioritize speed over deep verification."
+              },
+              {
+                "name": "abuse_strictness",
+                "value": "",
+                "type": "query",
+                "description": "Adjusts abuse-pattern detection (0-2)."
+              }
+            ]
+          },
+          "docs": "Verifies an email address for validity, deliverability, disposable or temporary domains, spam traps, honeypots, and recent abuse, returning a fraud score and DNS/MX checks."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

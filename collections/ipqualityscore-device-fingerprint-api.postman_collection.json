@@ -1,0 +1,166 @@
+{
+  "item": [
+    {
+      "id": "6fd6c035-a485-4515-b327-ff977bdf19a3",
+      "name": "Device Fingerprint",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d2c47f39-8d5a-45ec-81fd-d437e2c8cd87",
+          "name": "Score a device fingerprint.",
+          "request": {
+            "name": "Score a device fingerprint.",
+            "description": {
+              "content": "Analyzes 300+ data points about a user's device and session to detect bots, emulators, and high-risk behavior, returning a fraud score and device signals.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fingerprint",
+                ":api_key"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "api_key",
+                  "description": "(Required) Your IPQualityScore API key."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ip\": \"<string>\",\n  \"request_id\": \"<string>\",\n  \"device_id\": \"<string>\",\n  \"user_agent\": \"<string>\",\n  \"transaction_details\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1f5a324f-ff1b-4f0b-806a-c43dd0a9428e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fingerprint",
+                    ":api_key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "api_key",
+                      "description": "(Required) Your IPQualityScore API key."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ip\": \"<string>\",\n  \"request_id\": \"<string>\",\n  \"device_id\": \"<string>\",\n  \"user_agent\": \"<string>\",\n  \"transaction_details\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\",\n  \"fraud_chance\": 6075,\n  \"device_id\": \"string\",\n  \"bot_status\": true,\n  \"is_crawler\": true,\n  \"recent_abuse\": false,\n  \"fraud_score\": 870,\n  \"connection_type\": \"string\",\n  \"operating_system\": \"string\",\n  \"browser\": \"string\",\n  \"device_brand\": \"string\",\n  \"device_model\": \"string\",\n  \"request_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.ipqualityscore.com/api/json",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1fe98f9d-cc7d-49b9-a85e-77d9dcea98ae",
+    "name": "IPQualityScore Device Fingerprint API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Real-time fraud prevention and threat intelligence API from IPQualityScore (IPQS). Covers proxy/VPN/Tor and IP reputation scoring, email and phone validation, malicious URL scanning, device fingerprinting, transaction risk scoring, and dark-web leaked-data checks. The API key is passed as a path parameter and responses are returned as JSON.\n\nContact Support:\n Name: IPQualityScore Support",
+      "type": "text/plain"
+    }
+  }
+}

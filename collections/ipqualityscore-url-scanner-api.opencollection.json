@@ -1,0 +1,57 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "IPQualityScore Device Fingerprint URL Scanner API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "URL Scanner",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Scan a URL or domain for threats.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.ipqualityscore.com/api/json/url/:api_key/:url",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "path",
+                "description": "Your IPQualityScore API key."
+              },
+              {
+                "name": "url",
+                "value": "",
+                "type": "path",
+                "description": "The URL-encoded URL or domain to scan."
+              },
+              {
+                "name": "strictness",
+                "value": "",
+                "type": "query",
+                "description": "Adjusts sensitivity (0-2). 0 is least strict and recommended."
+              }
+            ]
+          },
+          "docs": "Scans a URL or domain for phishing, malware, parking, spam, and suspicious content, returning a risk score, domain reputation, and a content category."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

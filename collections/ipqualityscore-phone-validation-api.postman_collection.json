@@ -1,0 +1,183 @@
+{
+  "item": [
+    {
+      "id": "84209ebe-ce2d-4937-9cb8-34d9cb85c172",
+      "name": "Phone Validation",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "353f0b48-4e64-4ac8-9b27-679651ae050f",
+          "name": "Validate a phone number.",
+          "request": {
+            "name": "Validate a phone number.",
+            "description": {
+              "content": "Validates a phone number across 150+ countries, returning carrier, line type, active status, geolocation, and a fraud score.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "phone",
+                ":api_key",
+                ":phone"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "country",
+                  "value": "<string>",
+                  "description": "Comma-separated country codes to prefer for verification (e.g., US,CA)."
+                },
+                {
+                  "disabled": false,
+                  "key": "strictness",
+                  "value": "<integer>",
+                  "description": "Adjusts verification requirements (0-2)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "api_key",
+                  "description": "(Required) Your IPQualityScore API key."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "phone",
+                  "description": "(Required) The phone number to validate."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "435d129d-a31b-4219-b18e-8b2509ae678b",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "phone",
+                    ":api_key",
+                    ":phone"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "strictness",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "api_key",
+                      "description": "(Required) Your IPQualityScore API key."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "phone",
+                      "description": "(Required) The phone number to validate."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"string\",\n  \"valid\": true,\n  \"active\": true,\n  \"formatted\": \"string\",\n  \"local_format\": \"string\",\n  \"fraud_score\": 9739,\n  \"recent_abuse\": true,\n  \"VOIP\": false,\n  \"prepaid\": true,\n  \"risky\": false,\n  \"name\": \"string\",\n  \"carrier\": \"string\",\n  \"line_type\": \"string\",\n  \"country\": \"string\",\n  \"region\": \"string\",\n  \"city\": \"string\",\n  \"zip_code\": \"string\",\n  \"dialing_code\": 5884,\n  \"active_status\": \"string\",\n  \"leaked\": true,\n  \"do_not_call\": false,\n  \"request_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.ipqualityscore.com/api/json",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f8840199-25b9-481a-8269-4b0fb33f0bdf",
+    "name": "IPQualityScore Device Fingerprint Phone Validation API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Real-time fraud prevention and threat intelligence API from IPQualityScore (IPQS). Covers proxy/VPN/Tor and IP reputation scoring, email and phone validation, malicious URL scanning, device fingerprinting, transaction risk scoring, and dark-web leaked-data checks. The API key is passed as a path parameter and responses are returned as JSON.\n\nContact Support:\n Name: IPQualityScore Support",
+      "type": "text/plain"
+    }
+  }
+}
