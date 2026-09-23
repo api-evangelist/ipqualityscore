@@ -1,12 +1,7 @@
 {
   "provider": "ipqualityscore",
   "sources": [
-    "ipqualityscore-device-fingerprint-api-openapi.yml",
-    "ipqualityscore-email-validation-api-openapi.yml",
-    "ipqualityscore-ip-reputation-api-openapi.yml",
-    "ipqualityscore-leaked-data-api-openapi.yml",
-    "ipqualityscore-phone-validation-api-openapi.yml",
-    "ipqualityscore-url-scanner-api-openapi.yml"
+    "_original/ipqualityscore-openapi.yml"
   ],
   "outputs": [
     "ipqualityscore-device-fingerprint-api-openapi.yml",
@@ -19,6 +14,23 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "ipqualityscore-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "ipqualityscore-openapi.yml: declared missing tag: Device Fingerprint",
+    "ipqualityscore-openapi.yml: declared missing tag: Email Validation",
+    "ipqualityscore-openapi.yml: declared missing tag: IP Reputation",
+    "ipqualityscore-openapi.yml: declared missing tag: Leaked Data",
+    "ipqualityscore-openapi.yml: declared missing tag: Phone Validation",
+    "ipqualityscore-openapi.yml: declared missing tag: URL Scanner",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "ipqualityscore-device-fingerprint-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ipqualityscore-email-validation-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ipqualityscore-ip-reputation-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ipqualityscore-leaked-data-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ipqualityscore-phone-validation-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ipqualityscore-url-scanner-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

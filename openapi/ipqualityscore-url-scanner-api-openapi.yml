@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: IPQualityScore Device Fingerprint URL Scanner API
+  title: IPQualityScore URL Scanner API
   description: Real-time fraud prevention and threat intelligence API from IPQualityScore (IPQS). Covers proxy/VPN/Tor and IP reputation scoring, email and phone validation, malicious URL scanning, device fingerprinting, transaction risk scoring, and dark-web leaked-data checks. The API key is passed as a path parameter and responses are returned as JSON.
   termsOfService: https://www.ipqualityscore.com/terms-of-service
   contact:
@@ -19,7 +19,7 @@ paths:
       operationId: maliciousUrlScanner
       tags:
       - URL Scanner
-      summary: Scan a URL or domain for threats.
+      summary: Scan a URL or domain for threats
       description: Scans a URL or domain for phishing, malware, parking, spam, and suspicious content, returning a risk score, domain reputation, and a content category.
       parameters:
       - name: api_key

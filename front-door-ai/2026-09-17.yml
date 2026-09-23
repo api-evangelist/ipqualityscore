@@ -1,0 +1,27 @@
+# Front Door AI Index — ipqualityscore — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: ipqualityscore
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.ipqualityscore.com
+  final_host: www.ipqualityscore.com
+  ownership: own
+  owner: ipqualityscore
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 1
+  host_score: 1
+  density: 0.29
+  words: 3428
+  tiers:
+    agentic: 0
+    core: 1
+    model: 0
+  ambiguous: 47
+  top_terms:
+    intelligence: 45
+    automation: 2
+    machine learning: 1

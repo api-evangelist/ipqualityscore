@@ -1,4 +1,4 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   title: IPQualityScore Device Fingerprint API
   description: Real-time fraud prevention and threat intelligence API from IPQualityScore (IPQS). Covers proxy/VPN/Tor and IP reputation scoring, email and phone validation, malicious URL scanning, device fingerprinting, transaction risk scoring, and dark-web leaked-data checks. The API key is passed as a path parameter and responses are returned as JSON.
@@ -19,7 +19,7 @@ paths:
       operationId: deviceFingerprint
       tags:
       - Device Fingerprint
-      summary: Score a device fingerprint.
+      summary: Score a device fingerprint
       description: Analyzes 300+ data points about a user's device and session to detect bots, emulators, and high-risk behavior, returning a fraud score and device signals.
       parameters:
       - name: api_key
@@ -43,6 +43,21 @@ paths:
                 $ref: '#/components/schemas/FingerprintResponse'
 components:
   schemas:
+    FingerprintRequest:
+      type: object
+      properties:
+        ip:
+          type: string
+          description: The user's IP address.
+        request_id:
+          type: string
+          description: Device fingerprint request identifier from the client SDK.
+        device_id:
+          type: string
+        user_agent:
+          type: string
+        transaction_details:
+          type: object
     FingerprintResponse:
       type: object
       properties:
@@ -74,21 +89,6 @@ components:
           type: string
         request_id:
           type: string
-    FingerprintRequest:
-      type: object
-      properties:
-        ip:
-          type: string
-          description: The user's IP address.
-        request_id:
-          type: string
-          description: Device fingerprint request identifier from the client SDK.
-        device_id:
-          type: string
-        user_agent:
-          type: string
-        transaction_details:
-          type: object
   securitySchemes:
     ApiKeyPath:
       type: apiKey

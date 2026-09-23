@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: IPQualityScore Device Fingerprint Phone Validation API
+  title: IPQualityScore Phone Validation API
   description: Real-time fraud prevention and threat intelligence API from IPQualityScore (IPQS). Covers proxy/VPN/Tor and IP reputation scoring, email and phone validation, malicious URL scanning, device fingerprinting, transaction risk scoring, and dark-web leaked-data checks. The API key is passed as a path parameter and responses are returned as JSON.
   termsOfService: https://www.ipqualityscore.com/terms-of-service
   contact:
@@ -19,7 +19,7 @@ paths:
       operationId: phoneValidation
       tags:
       - Phone Validation
-      summary: Validate a phone number.
+      summary: Validate a phone number
       description: Validates a phone number across 150+ countries, returning carrier, line type, active status, geolocation, and a fraud score.
       parameters:
       - name: api_key

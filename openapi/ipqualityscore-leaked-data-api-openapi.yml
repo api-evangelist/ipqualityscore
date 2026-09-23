@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: IPQualityScore Device Fingerprint Leaked Data API
+  title: IPQualityScore Leaked Data API
   description: Real-time fraud prevention and threat intelligence API from IPQualityScore (IPQS). Covers proxy/VPN/Tor and IP reputation scoring, email and phone validation, malicious URL scanning, device fingerprinting, transaction risk scoring, and dark-web leaked-data checks. The API key is passed as a path parameter and responses are returned as JSON.
   termsOfService: https://www.ipqualityscore.com/terms-of-service
   contact:
@@ -19,7 +19,7 @@ paths:
       operationId: leakedData
       tags:
       - Leaked Data
-      summary: Check data against breached and dark-web databases.
+      summary: Check data against breached and dark-web databases
       description: Checks an email, phone, username, password, or combination against breached and dark-web databases, returning exposure status, breach sources, and first-seen timestamps.
       parameters:
       - name: type

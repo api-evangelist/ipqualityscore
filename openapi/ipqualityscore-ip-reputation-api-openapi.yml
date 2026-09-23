@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: IPQualityScore Device Fingerprint IP Reputation API
+  title: IPQualityScore IP Reputation API
   description: Real-time fraud prevention and threat intelligence API from IPQualityScore (IPQS). Covers proxy/VPN/Tor and IP reputation scoring, email and phone validation, malicious URL scanning, device fingerprinting, transaction risk scoring, and dark-web leaked-data checks. The API key is passed as a path parameter and responses are returned as JSON.
   termsOfService: https://www.ipqualityscore.com/terms-of-service
   contact:
@@ -19,7 +19,7 @@ paths:
       operationId: proxyDetection
       tags:
       - IP Reputation
-      summary: Proxy, VPN, Tor, and IP reputation lookup.
+      summary: Proxy, VPN, Tor, and IP reputation lookup
       description: Scores an IP address for proxy, VPN, and Tor usage, bot status, recent abuse, and abuse velocity, returning a 0-100 fraud score plus geolocation and connection metadata. Adding optional billing, shipping, payment, and order parameters enables Transaction Scoring, returning an additional transaction_details object.
       parameters:
       - name: api_key
