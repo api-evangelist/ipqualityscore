@@ -37,6 +37,12 @@ tags:
 - Fraud Prevention
 - IP Reputation
 - Proxy Detection
+- Email Verification
+- Threat Intelligence
+tags_raw:
+- Fraud Prevention
+- IP Reputation
+- Proxy Detection
 - Email Validation
 - Threat Intelligence
 created: '2026-06-25'
@@ -83,6 +89,8 @@ apis:
   humanURL: https://www.ipqualityscore.com/documentation/proxy-detection-api/overview
   baseURL: https://www.ipqualityscore.com/api/json
   tags:
+  - Email Verification
+  tags_raw:
   - Email Validation
   properties:
   - type: OpenAPI
