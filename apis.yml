@@ -46,7 +46,7 @@ tags_raw:
 - Email Validation
 - Threat Intelligence
 created: '2026-06-25'
-modified: '2026-06-25'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 apis:
 - aid: ipqualityscore:ipqualityscore-device-fingerprint-api
@@ -256,6 +256,8 @@ apis:
   - type: Documentation
     url: https://www.ipqualityscore.com/documentation/dark-web-leak-api/overview
 common:
+- url: https://www.ipqualityscore.com/articles
+  type: Blog
 - type: AgenticAccess
   url: agentic-access/ipqualityscore-agentic-access.yml
 - type: DomainSecurity
