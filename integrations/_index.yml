@@ -76,7 +76,7 @@
     app_slug: ipqualityscore
     beta: false
     builder: unknown (not in the directory record)
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
 - slug: ipqualityscore-wordpress-own
   label: WordPress (own)
